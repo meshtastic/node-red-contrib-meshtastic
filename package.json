@@ -2,6 +2,9 @@
   "name": "@meshtastic/node-red-contrib-meshtastic",
   "version": "1.0.0",
   "description": "Meshtastic protobuf converter for NodeRED",
+  "keywords": [
+    "node-red"
+  ],
   "scripts": {
     "build": "webpack && babel dist/esm -d dist/cjs && shx cp -r ./src/frontend/* ./dist/cjs"
   },
