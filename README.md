@@ -6,11 +6,7 @@
 
 ## Overview
 
-A description about the project
-
-**[Getting Started Guide](https://example.com)**
-
-**[Documentation/API Reference](https://example.com)**
+A Node-RED node for decoding Meshtastic Protobufs
 
 ## Stats
 
