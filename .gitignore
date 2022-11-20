@@ -1,7 +1,2 @@
-.idea
-.vscode
-yarn-debug.log*
-yarn-error.log*
-node_modules/
-*.tsbuildinfo
+node_modules
 dist

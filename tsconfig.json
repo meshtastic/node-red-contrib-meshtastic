@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "commonjs",
-    "lib": ["es2018", "esnext.asynciterable", "dom"],
+    "target": "ESNext",
+    "module": "ESNext",
     "allowJs": false,
     "noEmitOnError": true,
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "rootDir": "src",
     "removeComments": false,
     "noEmit": false,
     "importHelpers": false,
     "preserveWatchOutput": true,
-
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -26,10 +24,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
-    "forceConsistentCasingInFileNames": true,
-
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }

@@ -1,7 +1,0 @@
-{
-  "extends": "./tsconfig.runtime.json",
-  "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
-  }
-}
