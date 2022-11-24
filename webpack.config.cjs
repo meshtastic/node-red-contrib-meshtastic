@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/meshtastic.ts",
+  entry: "./src/decode.ts",
   target: "web",
   mode: "production",
   module: {
@@ -17,7 +17,7 @@ module.exports = {
     extensions: [".ts", ".js"],
   },
   output: {
-    filename: "meshtastic.js",
+    filename: "decode.js",
     path: path.resolve(__dirname, "dist/esm"),
     library: {
       type: "module",

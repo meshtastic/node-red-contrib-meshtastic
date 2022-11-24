@@ -15,7 +15,7 @@
   "license": "GPL-3.0-only",
   "node-red": {
     "nodes": {
-      "meshtastic": "./dist/cjs/meshtastic.js"
+      "decode": "./dist/cjs/decode.js"
     }
   },
   "dependencies": {
