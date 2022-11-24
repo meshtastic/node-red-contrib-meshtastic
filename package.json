@@ -14,6 +14,7 @@
   },
   "license": "GPL-3.0-only",
   "node-red": {
+    "version": ">=3.0.0",
     "nodes": {
       "decode": "./dist/cjs/decode.js"
     }
