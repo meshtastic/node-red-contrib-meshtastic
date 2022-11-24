@@ -1,6 +1,6 @@
 {
   "name": "@meshtastic/node-red-contrib-meshtastic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Meshtastic protobuf converter for NodeRED",
   "keywords": [
     "node-red"
@@ -16,6 +16,7 @@
   "node-red": {
     "version": ">=3.0.0",
     "nodes": {
+      "decrypt": "./dist/cjs/decrypt.js",
       "decode": "./dist/cjs/decode.js"
     }
   },

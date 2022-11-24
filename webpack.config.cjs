@@ -1,7 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/decode.ts",
+  entry: {
+    decode: "./src/decode.ts",
+    decrypt: "./src/decrypt.ts",
+  },
   target: "web",
   mode: "production",
   module: {
@@ -15,9 +18,10 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js"],
+    fallback: { crypto: false },
   },
   output: {
-    filename: "decode.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist/esm"),
     library: {
       type: "module",
