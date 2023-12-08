@@ -12,15 +12,15 @@ const nodeInit: NodeInitializer = (RED): void => {
         if (!decoded.packet) {
           return;
         }
-        switch (decoded.packet.payloadVariant.oneofKind) {
+        switch (decoded.packet.payloadVariant.case) {
           case "encrypted":
             break;
 
           case "decoded":
-            const { payload } = decoded.packet.payloadVariant.decoded;
+            const { payload } = decoded.packet.payloadVariant.value;
             let data: unknown;
 
-            switch (decoded.packet.payloadVariant.decoded.portnum) {
+            switch (decoded.packet.payloadVariant.value.portnum) {
               case Protobuf.PortNum.TEXT_MESSAGE_APP:
                 data = new TextDecoder().decode(payload);
                 break;
@@ -81,7 +81,7 @@ const nodeInit: NodeInitializer = (RED): void => {
             console.log(data);
 
             if (data) {
-              (decoded.packet.payloadVariant.decoded.payload as unknown) = data;
+              (decoded.packet.payloadVariant.value.payload as unknown) = data;
             }
 
             break;
