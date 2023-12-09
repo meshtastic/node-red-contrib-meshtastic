@@ -50,6 +50,9 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.TEXT_MESSAGE_COMPRESSED_APP:
+                // should never get here
+                // should be decompressed by the firmware to a TEXT_MESSAGE_APP packet
+                throw new Error("Received a TEXT_MESSAGE_COMPRESSED_APP message.\nPlease open an issue on Github as this should never happen");
                 break;
 
               case Protobuf.PortNum.WAYPOINT_APP:
