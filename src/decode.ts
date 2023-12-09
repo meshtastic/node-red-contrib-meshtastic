@@ -98,6 +98,7 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.NEIGHBORINFO_APP:
+                data = Protobuf.NeighborInfo.fromBinary(payload);
                 break;
 
               case Protobuf.PortNum.PRIVATE_APP:
