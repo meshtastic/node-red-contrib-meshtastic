@@ -81,6 +81,7 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.RANGE_TEST_APP:
+                data = new TextDecoder('ascii').decode(payload)
                 break;
 
               case Protobuf.PortNum.TELEMETRY_APP:
