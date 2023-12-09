@@ -77,6 +77,7 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.STORE_FORWARD_APP:
+                data = Protobuf.StoreAndForward.fromBinary(payload);
                 break;
 
               case Protobuf.PortNum.RANGE_TEST_APP:
