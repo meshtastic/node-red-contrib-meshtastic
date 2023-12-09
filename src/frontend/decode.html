@@ -2,10 +2,22 @@
   RED.nodes.registerType("decode", {
     category: "parser",
     color: "#67EA94",
+    defaults: {
+        name: {value:""},
+    },
     inputs: 1,
     outputs: 1,
     icon: "logo.svg",
   });
 </script>
 
-<script type="text/html" data-template-name="decode"></script>
+<script type="text/x-red" data-template-name="decode">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="decode">
+    <p>Node-RED node that decodes Meshtastic Packets.</p>
+</script>
