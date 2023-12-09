@@ -21,6 +21,10 @@ const nodeInit: NodeInitializer = (RED): void => {
             let data: unknown;
 
             switch (decoded.packet.payloadVariant.value.portnum) {
+
+              case Protobuf.PortNum.UNKNOWN_APP:
+                break;
+
               case Protobuf.PortNum.TEXT_MESSAGE_APP:
                 data = new TextDecoder().decode(payload);
                 break;
@@ -52,6 +56,12 @@ const nodeInit: NodeInitializer = (RED): void => {
                 data = Protobuf.Waypoint.fromBinary(payload);
                 break;
 
+              case Protobuf.PortNum.AUDIO_APP:
+                break;
+
+              case Protobuf.PortNum.DETECTION_SENSOR_APP:
+                break;
+
               case Protobuf.PortNum.REPLY_APP:
                 break;
 
@@ -69,6 +79,18 @@ const nodeInit: NodeInitializer = (RED): void => {
 
               case Protobuf.PortNum.TELEMETRY_APP:
                 data = Protobuf.Telemetry.fromBinary(payload);
+                break;
+
+              case Protobuf.PortNum.ZPS_APP:
+                break;
+
+              case Protobuf.PortNum.SIMULATOR_APP:
+                break;
+
+              case Protobuf.PortNum.TRACEROUTE_APP:
+                break;
+
+              case Protobuf.PortNum.NEIGHBORINFO_APP:
                 break;
 
               case Protobuf.PortNum.PRIVATE_APP:
