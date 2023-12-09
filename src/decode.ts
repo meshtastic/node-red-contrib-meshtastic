@@ -63,6 +63,7 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.DETECTION_SENSOR_APP:
+                data = new TextDecoder().decode(payload);
                 break;
 
               case Protobuf.PortNum.REPLY_APP:
