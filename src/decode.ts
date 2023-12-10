@@ -1,6 +1,6 @@
-import { Node, NodeDef, NodeInitializer } from 'node-red';
+import { Node, NodeDef, NodeInitializer } from "node-red";
 
-import { Protobuf } from '@meshtastic/meshtasticjs';
+import { Protobuf } from "@meshtastic/meshtasticjs";
 
 const nodeInit: NodeInitializer = (RED): void => {
   function DecodeNodeConstructor(this: Node, config: NodeDef): void {
@@ -16,96 +16,118 @@ const nodeInit: NodeInitializer = (RED): void => {
           case "encrypted":
             break;
 
-          case "decoded":
+          case "decoded": {
             const { payload } = decoded.packet.payloadVariant.value;
             let data: unknown;
 
             switch (decoded.packet.payloadVariant.value.portnum) {
-
-              case Protobuf.PortNum.UNKNOWN_APP:
+              case Protobuf.PortNum.UNKNOWN_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.TEXT_MESSAGE_APP:
+              case Protobuf.PortNum.TEXT_MESSAGE_APP: {
                 data = new TextDecoder().decode(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.REMOTE_HARDWARE_APP:
+              case Protobuf.PortNum.REMOTE_HARDWARE_APP: {
                 data = Protobuf.HardwareMessage.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.POSITION_APP:
+              case Protobuf.PortNum.POSITION_APP: {
                 data = Protobuf.Position.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.NODEINFO_APP:
+              case Protobuf.PortNum.NODEINFO_APP: {
                 data = Protobuf.User.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.ROUTING_APP:
+              case Protobuf.PortNum.ROUTING_APP: {
                 data = Protobuf.Routing.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.ADMIN_APP:
+              case Protobuf.PortNum.ADMIN_APP: {
                 data = Protobuf.AdminMessage.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.TEXT_MESSAGE_COMPRESSED_APP:
+              case Protobuf.PortNum.TEXT_MESSAGE_COMPRESSED_APP: {
                 // should never get here
                 // should be decompressed by the firmware to a TEXT_MESSAGE_APP packet
-                throw new Error("Received a TEXT_MESSAGE_COMPRESSED_APP message.\nPlease open an issue on Github as this should never happen");
-                break;
+                throw new Error(
+                  "Received a TEXT_MESSAGE_COMPRESSED_APP message.\nPlease open an issue on Github as this should never happen",
+                );
+              }
 
-              case Protobuf.PortNum.WAYPOINT_APP:
+              case Protobuf.PortNum.WAYPOINT_APP: {
                 data = Protobuf.Waypoint.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.AUDIO_APP:
+              case Protobuf.PortNum.AUDIO_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.DETECTION_SENSOR_APP:
+              case Protobuf.PortNum.DETECTION_SENSOR_APP: {
                 data = new TextDecoder().decode(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.REPLY_APP:
-                data = new TextDecoder('ascii').decode(payload)
+              case Protobuf.PortNum.REPLY_APP: {
+                data = new TextDecoder("ascii").decode(payload);
                 break;
-
-              case Protobuf.PortNum.IP_TUNNEL_APP:
+              }
+              case Protobuf.PortNum.IP_TUNNEL_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.SERIAL_APP:
+              case Protobuf.PortNum.SERIAL_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.STORE_FORWARD_APP:
+              case Protobuf.PortNum.STORE_FORWARD_APP: {
                 data = Protobuf.StoreAndForward.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.RANGE_TEST_APP:
-                data = new TextDecoder('ascii').decode(payload)
+              case Protobuf.PortNum.RANGE_TEST_APP: {
+                data = new TextDecoder("ascii").decode(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.TELEMETRY_APP:
+              case Protobuf.PortNum.TELEMETRY_APP: {
                 data = Protobuf.Telemetry.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.ZPS_APP:
+              case Protobuf.PortNum.ZPS_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.SIMULATOR_APP:
+              case Protobuf.PortNum.SIMULATOR_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.TRACEROUTE_APP:
+              case Protobuf.PortNum.TRACEROUTE_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.NEIGHBORINFO_APP:
+              case Protobuf.PortNum.NEIGHBORINFO_APP: {
                 data = Protobuf.NeighborInfo.fromBinary(payload);
                 break;
+              }
 
-              case Protobuf.PortNum.PRIVATE_APP:
+              case Protobuf.PortNum.PRIVATE_APP: {
                 break;
+              }
 
-              case Protobuf.PortNum.ATAK_FORWARDER:
+              case Protobuf.PortNum.ATAK_FORWARDER: {
                 break;
+              }
             }
 
             console.log(data);
@@ -115,6 +137,7 @@ const nodeInit: NodeInitializer = (RED): void => {
             }
 
             break;
+          }
         }
 
         send({

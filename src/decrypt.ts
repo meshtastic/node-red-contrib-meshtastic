@@ -1,5 +1,5 @@
-import { createDecipheriv } from 'crypto';
-import { Node, NodeDef, NodeInitializer } from 'node-red';
+import { createDecipheriv } from "crypto";
+import { Node, NodeDef, NodeInitializer } from "node-red";
 
 const nodeInit: NodeInitializer = (RED): void => {
   function DecryptNodeConstructor(this: Node, config: NodeDef): void {
