@@ -2,9 +2,9 @@ import { Node, NodeDef, NodeInitializer } from "node-red";
 
 import { Protobuf } from "@meshtastic/meshtasticjs";
 
-const nodeInit: NodeInitializer = (RED): void => {
+const nodeInit: NodeInitializer = (red): void => {
   function DecodeNodeConstructor(this: Node, config: NodeDef): void {
-    RED.nodes.createNode(this, config);
+    red.nodes.createNode(this, config);
 
     this.on("input", (msg, send, done) => {
       if (Buffer.isBuffer(msg.payload)) {
@@ -149,7 +149,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     });
   }
 
-  RED.nodes.registerType("decode", DecodeNodeConstructor);
+  red.nodes.registerType("decode", DecodeNodeConstructor);
 };
 
 export default nodeInit;

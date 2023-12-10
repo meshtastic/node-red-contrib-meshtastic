@@ -1,9 +1,9 @@
 import { createDecipheriv } from "crypto";
 import { Node, NodeDef, NodeInitializer } from "node-red";
 
-const nodeInit: NodeInitializer = (RED): void => {
+const nodeInit: NodeInitializer = (red): void => {
   function DecryptNodeConstructor(this: Node, config: NodeDef): void {
-    RED.nodes.createNode(this, config);
+    red.nodes.createNode(this, config);
 
     this.on("input", (msg, send, done) => {
       const key = "";
@@ -20,7 +20,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     });
   }
 
-  RED.nodes.registerType("decrypt", DecryptNodeConstructor);
+  red.nodes.registerType("decrypt", DecryptNodeConstructor);
 };
 
 export default nodeInit;
