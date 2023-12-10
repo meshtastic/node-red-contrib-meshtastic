@@ -21,6 +21,10 @@ const nodeInit: NodeInitializer = (RED): void => {
             let data: unknown;
 
             switch (decoded.packet.payloadVariant.value.portnum) {
+
+              case Protobuf.PortNum.UNKNOWN_APP:
+                break;
+
               case Protobuf.PortNum.TEXT_MESSAGE_APP:
                 data = new TextDecoder().decode(payload);
                 break;
@@ -46,13 +50,24 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.TEXT_MESSAGE_COMPRESSED_APP:
+                // should never get here
+                // should be decompressed by the firmware to a TEXT_MESSAGE_APP packet
+                throw new Error("Received a TEXT_MESSAGE_COMPRESSED_APP message.\nPlease open an issue on Github as this should never happen");
                 break;
 
               case Protobuf.PortNum.WAYPOINT_APP:
                 data = Protobuf.Waypoint.fromBinary(payload);
                 break;
 
+              case Protobuf.PortNum.AUDIO_APP:
+                break;
+
+              case Protobuf.PortNum.DETECTION_SENSOR_APP:
+                data = new TextDecoder().decode(payload);
+                break;
+
               case Protobuf.PortNum.REPLY_APP:
+                data = new TextDecoder('ascii').decode(payload)
                 break;
 
               case Protobuf.PortNum.IP_TUNNEL_APP:
@@ -62,13 +77,28 @@ const nodeInit: NodeInitializer = (RED): void => {
                 break;
 
               case Protobuf.PortNum.STORE_FORWARD_APP:
+                data = Protobuf.StoreAndForward.fromBinary(payload);
                 break;
 
               case Protobuf.PortNum.RANGE_TEST_APP:
+                data = new TextDecoder('ascii').decode(payload)
                 break;
 
               case Protobuf.PortNum.TELEMETRY_APP:
                 data = Protobuf.Telemetry.fromBinary(payload);
+                break;
+
+              case Protobuf.PortNum.ZPS_APP:
+                break;
+
+              case Protobuf.PortNum.SIMULATOR_APP:
+                break;
+
+              case Protobuf.PortNum.TRACEROUTE_APP:
+                break;
+
+              case Protobuf.PortNum.NEIGHBORINFO_APP:
+                data = Protobuf.NeighborInfo.fromBinary(payload);
                 break;
 
               case Protobuf.PortNum.PRIVATE_APP:
