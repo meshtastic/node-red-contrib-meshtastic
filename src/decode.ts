@@ -1,7 +1,5 @@
 import { Node, NodeDef, NodeInitializer } from "node-red";
-
-import { JsonValue, Message } from "@bufbuild/protobuf"
-
+import { Message } from "@bufbuild/protobuf"
 import { Protobuf } from "@meshtastic/meshtasticjs";
 
 const nodeInit: NodeInitializer = (red): void => {
@@ -14,13 +12,16 @@ const nodeInit: NodeInitializer = (red): void => {
         if (!decoded.packet) {
           return;
         }
+
+        const jsonWriteOptions = { emitDefaultValues: true, enumAsInteger: true };
+        const out = decoded.toJson(jsonWriteOptions);
+
         switch (decoded.packet.payloadVariant.case) {
           case "encrypted":
             break;
 
           case "decoded": {
             const { payload } = decoded.packet.payloadVariant.value;
-            const jsonWriteOptions = { emitDefaultValues: true, enumAsInteger: true };
             let data: Message | string;
 
             switch (decoded.packet.payloadVariant.value.portnum) {
@@ -97,7 +98,7 @@ const nodeInit: NodeInitializer = (red): void => {
                 break;
               }
 
-              case Protobuf.PortNum.dataANGE_TEST_APP: {
+              case Protobuf.PortNum.RANGE_TEST_APP: {
                 data = new TextDecoder("ascii").decode(payload);
                 break;
               }
@@ -133,23 +134,17 @@ const nodeInit: NodeInitializer = (red): void => {
               }
             }
 
-            const out = decoded.toJson(jsonWriteOptions)
-
             if (!data) {
               break;
             }
 
-            let decodedPayload: JsonValue | string;
-
             if (data instanceof Message) {
-              decodedPayload = data.fromBinary(payload).toJson(jsonWriteOptions)
+              out.packet.decoded.payload = data.fromBinary(payload).toJson(jsonWriteOptions);
             } else {
-              decodedPayload = data
+              out.packet.decoded.payload = data;
             }
 
-            console.log(decodedPayload);
-
-            out.packet.decoded.payload = decodedPayload;
+            console.log(JSON.stringify(out, null, 2));
 
             break;
           }
