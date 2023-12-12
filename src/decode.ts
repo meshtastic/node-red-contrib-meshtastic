@@ -14,9 +14,6 @@ const nodeInit: NodeInitializer = (red): void => {
         if (!decoded.packet) {
           return;
         }
-
-        let out: JsonValue;
-
         switch (decoded.packet.payloadVariant.case) {
           case "encrypted":
             break;
@@ -100,7 +97,7 @@ const nodeInit: NodeInitializer = (red): void => {
                 break;
               }
 
-              case Protobuf.PortNum.RANGE_TEST_APP: {
+              case Protobuf.PortNum.dataANGE_TEST_APP: {
                 data = new TextDecoder("ascii").decode(payload);
                 break;
               }
@@ -136,7 +133,7 @@ const nodeInit: NodeInitializer = (red): void => {
               }
             }
 
-            out = decoded.toJson(jsonWriteOptions)
+            const out = decoded.toJson(jsonWriteOptions)
 
             if (!data) {
               break;
@@ -152,15 +149,8 @@ const nodeInit: NodeInitializer = (red): void => {
 
             console.log(decodedPayload);
 
-
             out.packet.decoded.payload = decodedPayload;
 
-            // include packet.payloadVariant for legacy flows
-            const payloadVariant = {
-              oneofKind: "decoded",
-              decoded: out.packet.decoded
-            };
-            out.packet.payloadVariant = payloadVariant;
             break;
           }
         }
