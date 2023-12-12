@@ -1,5 +1,7 @@
 import { Node, NodeDef, NodeInitializer } from "node-red";
 
+import { JsonValue, Message } from "@bufbuild/protobuf"
+
 import { Protobuf } from "@meshtastic/meshtasticjs";
 
 const nodeInit: NodeInitializer = (red): void => {
@@ -13,7 +15,7 @@ const nodeInit: NodeInitializer = (red): void => {
           return;
         }
 
-        let out: any;
+        let out: JsonValue;
 
         switch (decoded.packet.payloadVariant.case) {
           case "encrypted":
@@ -22,7 +24,7 @@ const nodeInit: NodeInitializer = (red): void => {
           case "decoded": {
             const { payload } = decoded.packet.payloadVariant.value;
             const jsonWriteOptions = { emitDefaultValues: true, enumAsInteger: true };
-            let data: unknown;
+            let data: Message | string;
 
             switch (decoded.packet.payloadVariant.value.portnum) {
               case Protobuf.PortNum.UNKNOWN_APP: {
@@ -35,27 +37,27 @@ const nodeInit: NodeInitializer = (red): void => {
               }
 
               case Protobuf.PortNum.REMOTE_HARDWARE_APP: {
-                data = Protobuf.HardwareMessage.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.HardwareMessage;
                 break;
               }
 
               case Protobuf.PortNum.POSITION_APP: {
-                data = Protobuf.Position.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.Position;
                 break;
               }
 
               case Protobuf.PortNum.NODEINFO_APP: {
-                data = Protobuf.User.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.User;
                 break;
               }
 
               case Protobuf.PortNum.ROUTING_APP: {
-                data = Protobuf.Routing.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.Routing;
                 break;
               }
 
               case Protobuf.PortNum.ADMIN_APP: {
-                data = Protobuf.AdminMessage.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.AdminMessage;
                 break;
               }
 
@@ -68,7 +70,7 @@ const nodeInit: NodeInitializer = (red): void => {
               }
 
               case Protobuf.PortNum.WAYPOINT_APP: {
-                data = Protobuf.Waypoint.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.Waypoint;
                 break;
               }
 
@@ -94,7 +96,7 @@ const nodeInit: NodeInitializer = (red): void => {
               }
 
               case Protobuf.PortNum.STORE_FORWARD_APP: {
-                data = Protobuf.StoreAndForward.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.StoreAndForward;
                 break;
               }
 
@@ -104,7 +106,7 @@ const nodeInit: NodeInitializer = (red): void => {
               }
 
               case Protobuf.PortNum.TELEMETRY_APP: {
-                data = Protobuf.Telemetry.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.Telemetry;
                 break;
               }
 
@@ -121,7 +123,7 @@ const nodeInit: NodeInitializer = (red): void => {
               }
 
               case Protobuf.PortNum.NEIGHBORINFO_APP: {
-                data = Protobuf.NeighborInfo.fromBinary(payload).toJson(jsonWriteOptions);
+                data = new Protobuf.NeighborInfo;
                 break;
               }
 
@@ -134,13 +136,24 @@ const nodeInit: NodeInitializer = (red): void => {
               }
             }
 
-            console.log(data);
-
             out = decoded.toJson(jsonWriteOptions)
 
-            if (data) {
-              out.packet.decoded.payload = data;
+            if (!data) {
+              break;
             }
+
+            let decodedPayload: JsonValue | string;
+
+            if (data instanceof Message) {
+              decodedPayload = data.fromBinary(payload).toJson(jsonWriteOptions)
+            } else {
+              decodedPayload = data
+            }
+
+            console.log(decodedPayload);
+
+
+            out.packet.decoded.payload = decodedPayload;
 
             // include packet.payloadVariant for legacy flows
             const payloadVariant = {
@@ -148,7 +161,6 @@ const nodeInit: NodeInitializer = (red): void => {
               decoded: out.packet.decoded
             };
             out.packet.payloadVariant = payloadVariant;
-
             break;
           }
         }
