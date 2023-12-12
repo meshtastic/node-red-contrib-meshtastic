@@ -1,6 +1,32 @@
 import { Node, NodeDef, NodeInitializer } from "node-red";
-import { Message } from "@bufbuild/protobuf"
+import { Message } from "@bufbuild/protobuf";
 import { Protobuf } from "@meshtastic/meshtasticjs";
+
+const decoders = {
+  [Protobuf.PortNum.UNKNOWN_APP]: null,
+  [Protobuf.PortNum.TEXT_MESSAGE_APP]: new TextDecoder(),
+  [Protobuf.PortNum.REMOTE_HARDWARE_APP]: new Protobuf.HardwareMessage(),
+  [Protobuf.PortNum.POSITION_APP]: new Protobuf.Position(),
+  [Protobuf.PortNum.NODEINFO_APP]: new Protobuf.User(),
+  [Protobuf.PortNum.ROUTING_APP]: new Protobuf.Routing(),
+  [Protobuf.PortNum.ADMIN_APP]: new Protobuf.AdminMessage(),
+  [Protobuf.PortNum.TEXT_MESSAGE_COMPRESSED_APP]: null,
+  [Protobuf.PortNum.WAYPOINT_APP]: new Protobuf.Waypoint(),
+  [Protobuf.PortNum.AUDIO_APP]: null,
+  [Protobuf.PortNum.DETECTION_SENSOR_APP]: new TextDecoder(),
+  [Protobuf.PortNum.REPLY_APP]: new TextDecoder("ascii"),
+  [Protobuf.PortNum.IP_TUNNEL_APP]: null,
+  [Protobuf.PortNum.SERIAL_APP]: null,
+  [Protobuf.PortNum.STORE_FORWARD_APP]: new Protobuf.StoreAndForward(),
+  [Protobuf.PortNum.RANGE_TEST_APP]: new TextDecoder("ascii"),
+  [Protobuf.PortNum.TELEMETRY_APP]: new Protobuf.Telemetry(),
+  [Protobuf.PortNum.ZPS_APP]: null,
+  [Protobuf.PortNum.SIMULATOR_APP]: null,
+  [Protobuf.PortNum.TRACEROUTE_APP]: null,
+  [Protobuf.PortNum.NEIGHBORINFO_APP]: new Protobuf.NeighborInfo(),
+  [Protobuf.PortNum.PRIVATE_APP]: null,
+  [Protobuf.PortNum.ATAK_FORWARDER]: null,
+};
 
 const nodeInit: NodeInitializer = (red): void => {
   function DecodeNodeConstructor(this: Node, config: NodeDef): void {
@@ -13,7 +39,10 @@ const nodeInit: NodeInitializer = (red): void => {
           return;
         }
 
-        const jsonWriteOptions = { emitDefaultValues: true, enumAsInteger: true };
+        const jsonWriteOptions = {
+          emitDefaultValues: true,
+          enumAsInteger: true,
+        };
         const out = decoded.toJson(jsonWriteOptions);
 
         switch (decoded.packet.payloadVariant.case) {
@@ -21,130 +50,27 @@ const nodeInit: NodeInitializer = (red): void => {
             break;
 
           case "decoded": {
-            const { payload } = decoded.packet.payloadVariant.value;
-            let data: Message | string;
-
-            switch (decoded.packet.payloadVariant.value.portnum) {
-              case Protobuf.PortNum.UNKNOWN_APP: {
+            try {
+              const portNum = decoded.packet.payloadVariant.value.portnum;
+              if (decoders[portNum] === null) {
                 break;
               }
 
-              case Protobuf.PortNum.TEXT_MESSAGE_APP: {
-                data = new TextDecoder().decode(payload);
-                break;
+              const { payload } = decoded.packet.payloadVariant.value;
+              const decoder = decoders[portNum];
+
+              if (decoder instanceof Message) {
+                out.packet.decoded.payload = decoder
+                  .fromBinary(payload)
+                  .toJson(jsonWriteOptions);
+              } else if (decoder instanceof TextDecoder) {
+                out.packet.decoded.payload = decoder.decode(payload);
               }
 
-              case Protobuf.PortNum.REMOTE_HARDWARE_APP: {
-                data = new Protobuf.HardwareMessage;
-                break;
-              }
-
-              case Protobuf.PortNum.POSITION_APP: {
-                data = new Protobuf.Position;
-                break;
-              }
-
-              case Protobuf.PortNum.NODEINFO_APP: {
-                data = new Protobuf.User;
-                break;
-              }
-
-              case Protobuf.PortNum.ROUTING_APP: {
-                data = new Protobuf.Routing;
-                break;
-              }
-
-              case Protobuf.PortNum.ADMIN_APP: {
-                data = new Protobuf.AdminMessage;
-                break;
-              }
-
-              case Protobuf.PortNum.TEXT_MESSAGE_COMPRESSED_APP: {
-                // should never get here
-                // should be decompressed by the firmware to a TEXT_MESSAGE_APP packet
-                throw new Error(
-                  "Received a TEXT_MESSAGE_COMPRESSED_APP message.\nPlease open an issue on Github as this should never happen",
-                );
-              }
-
-              case Protobuf.PortNum.WAYPOINT_APP: {
-                data = new Protobuf.Waypoint;
-                break;
-              }
-
-              case Protobuf.PortNum.AUDIO_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.DETECTION_SENSOR_APP: {
-                data = new TextDecoder().decode(payload);
-                break;
-              }
-
-              case Protobuf.PortNum.REPLY_APP: {
-                data = new TextDecoder("ascii").decode(payload);
-                break;
-              }
-              case Protobuf.PortNum.IP_TUNNEL_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.SERIAL_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.STORE_FORWARD_APP: {
-                data = new Protobuf.StoreAndForward;
-                break;
-              }
-
-              case Protobuf.PortNum.RANGE_TEST_APP: {
-                data = new TextDecoder("ascii").decode(payload);
-                break;
-              }
-
-              case Protobuf.PortNum.TELEMETRY_APP: {
-                data = new Protobuf.Telemetry;
-                break;
-              }
-
-              case Protobuf.PortNum.ZPS_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.SIMULATOR_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.TRACEROUTE_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.NEIGHBORINFO_APP: {
-                data = new Protobuf.NeighborInfo;
-                break;
-              }
-
-              case Protobuf.PortNum.PRIVATE_APP: {
-                break;
-              }
-
-              case Protobuf.PortNum.ATAK_FORWARDER: {
-                break;
-              }
+              console.log(JSON.stringify(out, null, 2));
+            } catch (error) {
+              console.log(`could not decode payload:${error}`);
             }
-
-            if (!data) {
-              break;
-            }
-
-            if (data instanceof Message) {
-              out.packet.decoded.payload = data.fromBinary(payload).toJson(jsonWriteOptions);
-            } else {
-              out.packet.decoded.payload = data;
-            }
-
-            console.log(JSON.stringify(out, null, 2));
 
             break;
           }
