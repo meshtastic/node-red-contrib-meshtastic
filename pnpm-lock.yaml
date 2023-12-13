@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@bufbuild/protobuf':
+    specifier: ^1.5.1
+    version: 1.5.1
   '@meshtastic/meshtasticjs':
     specifier: 2.2.15-1
     version: 2.2.15-1
@@ -728,6 +731,7 @@ packages:
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
+    requiresBuild: true
     dev: true
 
   /ansi-styles@2.2.1:

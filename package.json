@@ -1,8 +1,10 @@
 {
   "name": "@meshtastic/node-red-contrib-meshtastic",
-  "version": "2.2.15-3",
+  "version": "2.2.15-4",
   "description": "Meshtastic protobuf converter for NodeRED",
-  "keywords": ["node-red"],
+  "keywords": [
+    "node-red"
+  ],
   "scripts": {
     "build": "vite build"
   },
@@ -14,8 +16,12 @@
       "decode": "./dist/decode.js"
     }
   },
-  "files": ["dist", ".npmrc"],
+  "files": [
+    "dist",
+    ".npmrc"
+  ],
   "dependencies": {
+    "@bufbuild/protobuf": "^1.5.1",
     "@meshtastic/meshtasticjs": "2.2.15-1"
   },
   "devDependencies": {
