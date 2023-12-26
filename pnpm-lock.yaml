@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@bufbuild/protobuf':
+    specifier: ^1.6.0
+    version: 1.6.0
   '@meshtastic/meshtasticjs':
     specifier: 2.2.16-0
     version: 2.2.16-0
