@@ -8,7 +8,7 @@ dependencies:
   '@bufbuild/protobuf':
     specifier: ^1.6.0
     version: 1.6.0
-  '@meshtastic/meshtasticjs':
+  '@meshtastic/js':
     specifier: 2.2.16-0
     version: 2.2.16-0
 
@@ -38,8 +38,8 @@ packages:
       regenerator-runtime: 0.14.1
     dev: true
 
-  /@buf/meshtastic_protobufs.bufbuild_es@1.6.0-20231206215336-8002ce9b3c7a.1(@bufbuild/protobuf@1.6.0):
-    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/meshtastic_protobufs.bufbuild_es/-/meshtastic_protobufs.bufbuild_es-1.6.0-20231206215336-8002ce9b3c7a.1.tgz}
+  /@buf/meshtastic_protobufs.bufbuild_es@1.6.0-20231217172755-5fd2f2d6c2a0.1(@bufbuild/protobuf@1.6.0):
+    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/meshtastic_protobufs.bufbuild_es/-/meshtastic_protobufs.bufbuild_es-1.6.0-20231217172755-5fd2f2d6c2a0.1.tgz}
     peerDependencies:
       '@bufbuild/protobuf': ^1.6.0
     dependencies:
@@ -277,10 +277,10 @@ packages:
     dev: true
     optional: true
 
-  /@meshtastic/meshtasticjs@2.2.16-0:
-    resolution: {integrity: sha512-s1KdXxMmgtvu3NMoEy4U0WJPACTJrQ0JbhSjOm9s2AhMnb6496YQr8DYlhuzo6MhdLTEe3asGXncxoKcdWGqQQ==}
+  /@meshtastic/js@2.2.16-0:
+    resolution: {integrity: sha512-uwo6ODtHr+x5HSrSkMcUsqW3DC75ANfqby2N7dKMJ1xnoU7G9NPbrHAGm8xMv0N6QR+118yWSLbx3HSvVIsN8w==}
     dependencies:
-      '@buf/meshtastic_protobufs.bufbuild_es': 1.6.0-20231206215336-8002ce9b3c7a.1(@bufbuild/protobuf@1.6.0)
+      '@buf/meshtastic_protobufs.bufbuild_es': 1.6.0-20231217172755-5fd2f2d6c2a0.1(@bufbuild/protobuf@1.6.0)
       '@bufbuild/protobuf': 1.6.0
       crc: 4.3.2
       sub-events: 1.9.0
@@ -820,6 +820,7 @@ packages:
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+    requiresBuild: true
     dev: true
 
   /base64-js@1.5.1:
@@ -942,6 +943,7 @@ packages:
 
   /brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
+    requiresBuild: true
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
@@ -1099,6 +1101,7 @@ packages:
 
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    requiresBuild: true
     dev: true
 
   /concat-stream@1.6.2:
@@ -1621,6 +1624,7 @@ packages:
 
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+    requiresBuild: true
     dev: true
 
   /fsevents@2.3.3:
@@ -1853,6 +1857,7 @@ packages:
 
   /inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    requiresBuild: true
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
@@ -2119,6 +2124,7 @@ packages:
 
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
+    requiresBuild: true
     dependencies:
       brace-expansion: 1.1.11
     dev: true

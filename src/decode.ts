@@ -1,6 +1,6 @@
 import { Node, NodeDef, NodeInitializer } from "node-red";
 import { Message } from "@bufbuild/protobuf";
-import { Protobuf } from "@meshtastic/meshtasticjs";
+import { Protobuf } from "@meshtastic/js";
 
 const decoders = {
   [Protobuf.PortNum.UNKNOWN_APP]: null,
