@@ -9,10 +9,13 @@ dependencies:
     specifier: ^1.6.0
     version: 1.6.0
   '@meshtastic/js':
-    specifier: 2.2.16-0
-    version: 2.2.16-0
+    specifier: 2.2.17-4
+    version: 2.2.17-4
 
 devDependencies:
+  '@buf/meshtastic_protobufs.bufbuild_es':
+    specifier: 1.6.0-20231227193150-3f9c1dfd2a29.1
+    version: 1.6.0-20231227193150-3f9c1dfd2a29.1(@bufbuild/protobuf@1.6.0)
   '@types/node-red':
     specifier: ^1.3.4
     version: 1.3.4
@@ -38,17 +41,16 @@ packages:
       regenerator-runtime: 0.14.1
     dev: true
 
-  /@buf/meshtastic_protobufs.bufbuild_es@1.6.0-20231217172755-5fd2f2d6c2a0.1(@bufbuild/protobuf@1.6.0):
-    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/meshtastic_protobufs.bufbuild_es/-/meshtastic_protobufs.bufbuild_es-1.6.0-20231217172755-5fd2f2d6c2a0.1.tgz}
+  /@buf/meshtastic_protobufs.bufbuild_es@1.6.0-20231227193150-3f9c1dfd2a29.1(@bufbuild/protobuf@1.6.0):
+    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/meshtastic_protobufs.bufbuild_es/-/meshtastic_protobufs.bufbuild_es-1.6.0-20231227193150-3f9c1dfd2a29.1.tgz}
     peerDependencies:
       '@bufbuild/protobuf': ^1.6.0
     dependencies:
       '@bufbuild/protobuf': 1.6.0
-    dev: false
+    dev: true
 
   /@bufbuild/protobuf@1.6.0:
     resolution: {integrity: sha512-hp19vSFgNw3wBBcVBx5qo5pufCqjaJ0Cfk5H/pfjNOfNWU+4/w0QVOmfAOZNRrNWRrVuaJWxcN8P2vhOkkzbBQ==}
-    dev: false
 
   /@esbuild/aix-ppc64@0.19.10:
     resolution: {integrity: sha512-Q+mk96KJ+FZ30h9fsJl+67IjNJm3x2eX+GBWGmocAKgzp27cowCOOqSdscX80s0SpdFXZnIv/+1xD1EctFx96Q==}
@@ -277,11 +279,9 @@ packages:
     dev: true
     optional: true
 
-  /@meshtastic/js@2.2.16-0:
-    resolution: {integrity: sha512-uwo6ODtHr+x5HSrSkMcUsqW3DC75ANfqby2N7dKMJ1xnoU7G9NPbrHAGm8xMv0N6QR+118yWSLbx3HSvVIsN8w==}
+  /@meshtastic/js@2.2.17-4:
+    resolution: {integrity: sha512-L7nFKzv+Jl/q9TbSmedOqmM2+LKQT7yDUn5TJJ2kjSYP/Gvgb5P+Xby+YmhErfIRaunRtQ0DJM8a0IPrFzoRPg==}
     dependencies:
-      '@buf/meshtastic_protobufs.bufbuild_es': 1.6.0-20231217172755-5fd2f2d6c2a0.1(@bufbuild/protobuf@1.6.0)
-      '@bufbuild/protobuf': 1.6.0
       crc: 4.3.2
       sub-events: 1.9.0
       tslog: 4.9.2
