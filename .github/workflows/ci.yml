@@ -1,9 +1,8 @@
 name: CI
 
-on: 
-  push:
-    branches:
-      - master
+on: push
+
+permissions: write-all
 
 jobs:
   quality:
@@ -23,19 +22,19 @@ jobs:
         run: biome ci .
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - name: Checkout code & submodules
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
 
       - name: Install Dependencies
         run: pnpm install
@@ -46,4 +45,4 @@ jobs:
       - name: "Publish to NPM"
         uses: JS-DevTools/npm-publish@v3
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
