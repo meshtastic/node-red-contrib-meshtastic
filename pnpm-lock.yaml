@@ -9,16 +9,16 @@ dependencies:
     specifier: ^1.6.0
     version: 1.6.0
   '@meshtastic/js':
-    specifier: 2.2.17-5
-    version: 2.2.17-5
+    specifier: 2.2.18-0
+    version: 2.2.18-0
 
 devDependencies:
   '@biomejs/biome':
-    specifier: ^1.4.1
-    version: 1.4.1
+    specifier: ^1.5.0
+    version: 1.5.0
   '@buf/meshtastic_protobufs.bufbuild_es':
-    specifier: 1.6.0-20240104182715-af4a215beb91.1
-    version: 1.6.0-20240104182715-af4a215beb91.1(@bufbuild/protobuf@1.6.0)
+    specifier: 1.6.0-20240106203407-94f78518ac45.1
+    version: 1.6.0-20240106203407-94f78518ac45.1(@bufbuild/protobuf@1.6.0)
   '@types/node-red':
     specifier: ^1.3.4
     version: 1.3.4
@@ -41,22 +41,24 @@ packages:
       regenerator-runtime: 0.14.1
     dev: true
 
-  /@biomejs/biome@1.4.1:
-    resolution: {integrity: sha512-JccVAwPbhi37pdxbAGmaOBjUTKEwEjWAhl7rKkVVuXHo4MLASXJ5HR8BTgrImi4/7rTBsGz1tgVD1Kwv1CHGRg==}
+  /@biomejs/biome@1.5.0:
+    resolution: {integrity: sha512-ln+o5jbs109qpeDoA+5n+vlAPai3DhlK0tHtZXzQvu4tswFgxNiJCeIXmlW1DYHziTmtBImV3Y0uhbm2iVSE3Q==}
     engines: {node: '>=14.*'}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 1.4.1
-      '@biomejs/cli-darwin-x64': 1.4.1
-      '@biomejs/cli-linux-arm64': 1.4.1
-      '@biomejs/cli-linux-x64': 1.4.1
-      '@biomejs/cli-win32-arm64': 1.4.1
-      '@biomejs/cli-win32-x64': 1.4.1
+      '@biomejs/cli-darwin-arm64': 1.5.0
+      '@biomejs/cli-darwin-x64': 1.5.0
+      '@biomejs/cli-linux-arm64': 1.5.0
+      '@biomejs/cli-linux-arm64-musl': 1.5.0
+      '@biomejs/cli-linux-x64': 1.5.0
+      '@biomejs/cli-linux-x64-musl': 1.5.0
+      '@biomejs/cli-win32-arm64': 1.5.0
+      '@biomejs/cli-win32-x64': 1.5.0
     dev: true
 
-  /@biomejs/cli-darwin-arm64@1.4.1:
-    resolution: {integrity: sha512-PZWy2Idndqux38p6AXSDQM2ldRAWi32bvb7bMbTN0ALzpWYMYnxd71ornatumSSJYoNhKmxzDLq+jct7nZJ79w==}
+  /@biomejs/cli-darwin-arm64@1.5.0:
+    resolution: {integrity: sha512-3+D7axf04dpadGMOaqb2q+zyQnhWW0o/Imt7TJBWsoE0N3/+28Wht8g3UEHHcUL5FPuGIfsE+NcYntBaaAsEIg==}
     engines: {node: '>=14.*'}
     cpu: [arm64]
     os: [darwin]
@@ -64,8 +66,8 @@ packages:
     dev: true
     optional: true
 
-  /@biomejs/cli-darwin-x64@1.4.1:
-    resolution: {integrity: sha512-soj3BWhnsM1M2JlzR09cibUzG1owJqetwj/Oo7yg0foijo9lNH9XWXZfJBYDKgW/6Fomn+CC2EcUS+hisQzt9g==}
+  /@biomejs/cli-darwin-x64@1.5.0:
+    resolution: {integrity: sha512-8k5aaLWE/B6ZAXLC+z/Vwh9ogyiSaiRIfvg+F9foxuneHl2R/D/2Iy7pvd3Yoi4Kf6/MBdowekPVezGP4/Kbcw==}
     engines: {node: '>=14.*'}
     cpu: [x64]
     os: [darwin]
@@ -73,8 +75,8 @@ packages:
     dev: true
     optional: true
 
-  /@biomejs/cli-linux-arm64@1.4.1:
-    resolution: {integrity: sha512-YIZqfJUg4F+fPsBTXxgD7EU2E5OAYbmYSl/snf4PevwfQCWE/omOFZv+NnIQmjYj9I7ParDgcJvanoA3/kO0JQ==}
+  /@biomejs/cli-linux-arm64-musl@1.5.0:
+    resolution: {integrity: sha512-+1B3J8tWLTOvP3+00Cap+XhEXMvxwCHvVfuywUsB7Sqd66NWic3wKJuGbGcS3PuCWtGuIFsiQMNAGqiOXG4uBQ==}
     engines: {node: '>=14.*'}
     cpu: [arm64]
     os: [linux]
@@ -82,8 +84,17 @@ packages:
     dev: true
     optional: true
 
-  /@biomejs/cli-linux-x64@1.4.1:
-    resolution: {integrity: sha512-9YOZw3qBd/KUj63A6Hn2zZgzGb2nbESM0qNmeMXgmqinVKM//uc4OgY5TuKITuGjMSvcVxxd4dX1IzYjV9qvNQ==}
+  /@biomejs/cli-linux-arm64@1.5.0:
+    resolution: {integrity: sha512-RiecxG71E1jnqiJZ3FaikVBDRkk2ohIxBo0O4o68g87y6Hug//G0S83sj6Wqyn8DgKMCRWQg+XYMgk5CwLVowA==}
+    engines: {node: '>=14.*'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-linux-x64-musl@1.5.0:
+    resolution: {integrity: sha512-4S2rLluc0WT+XTbLTgcm9+5EEFwJmoGiUEzR6N0P2sIjZD8c5KNf9Ou46BP1Pdg5AgqV+IIClGPK1I80ApSh1Q==}
     engines: {node: '>=14.*'}
     cpu: [x64]
     os: [linux]
@@ -91,8 +102,17 @@ packages:
     dev: true
     optional: true
 
-  /@biomejs/cli-win32-arm64@1.4.1:
-    resolution: {integrity: sha512-nWQbvkNKxYn/kCQ0yVF8kCaS3VzaGvtFSmItXiMknU4521LDjJ7tNWH12Gol+pIslrCbd4E1LhJa0a3ThRsBVg==}
+  /@biomejs/cli-linux-x64@1.5.0:
+    resolution: {integrity: sha512-TlTsG+ptSmnDTUsAAYsXyGOXMcFiF8SiwhPdj4YsNkJRgx9M2curEVcTVm66FINIPK6VJTUcEDahFlx3NPUOzA==}
+    engines: {node: '>=14.*'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-win32-arm64@1.5.0:
+    resolution: {integrity: sha512-sWOi1SR+YqJuXElBncGRnWBR7IN7ni6GQY4Zm/vTpP6nVA0dX5C301eQUW1N/VnFQb6fyrJTcBslDUKyemsN/g==}
     engines: {node: '>=14.*'}
     cpu: [arm64]
     os: [win32]
@@ -100,8 +120,8 @@ packages:
     dev: true
     optional: true
 
-  /@biomejs/cli-win32-x64@1.4.1:
-    resolution: {integrity: sha512-88fR2CQxQ4YLs2BUDuywWYQpUKgU3A3sTezANFc/4LGKQFFLV2yX+F7QAdZVkMHfA+RD9Xg178HomM/6mnTNPA==}
+  /@biomejs/cli-win32-x64@1.5.0:
+    resolution: {integrity: sha512-OoqgUXyzmRwX466bklOsWS7WdcvWtBuxF94DXATNe7bUiBa2tlW8QX7VVZvPnMKH57E5J619AkB3b5fhzyUhXA==}
     engines: {node: '>=14.*'}
     cpu: [x64]
     os: [win32]
@@ -109,8 +129,8 @@ packages:
     dev: true
     optional: true
 
-  /@buf/meshtastic_protobufs.bufbuild_es@1.6.0-20240104182715-af4a215beb91.1(@bufbuild/protobuf@1.6.0):
-    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/meshtastic_protobufs.bufbuild_es/-/meshtastic_protobufs.bufbuild_es-1.6.0-20240104182715-af4a215beb91.1.tgz}
+  /@buf/meshtastic_protobufs.bufbuild_es@1.6.0-20240106203407-94f78518ac45.1(@bufbuild/protobuf@1.6.0):
+    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/meshtastic_protobufs.bufbuild_es/-/meshtastic_protobufs.bufbuild_es-1.6.0-20240106203407-94f78518ac45.1.tgz}
     peerDependencies:
       '@bufbuild/protobuf': ^1.6.0
     dependencies:
@@ -347,8 +367,8 @@ packages:
     dev: true
     optional: true
 
-  /@meshtastic/js@2.2.17-5:
-    resolution: {integrity: sha512-03z+Z2EqsNxHqPqaUjfycNi9luPnLAQaaAAyjSwz7O+SCpRWKVDfyZTxTcjQDdFj5HL88ygz3EsWp6w/masW3g==}
+  /@meshtastic/js@2.2.18-0:
+    resolution: {integrity: sha512-A3ZHubbe21a6h+slvgQQIsgiKzbRzikXhpoDAPLNprkzfaDgeyOsDaqingg3d30ynehsoG0hn8cVVxAOhlZ0xg==}
     dependencies:
       crc: 4.3.2
       sub-events: 1.9.0
