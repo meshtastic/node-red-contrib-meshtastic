@@ -2,7 +2,9 @@
   "name": "@meshtastic/node-red-contrib-meshtastic",
   "version": "2.2.18-0",
   "description": "Meshtastic protobuf converter for NodeRED",
-  "keywords": ["node-red"],
+  "keywords": [
+    "node-red"
+  ],
   "scripts": {
     "build": "vite build"
   },
@@ -14,13 +16,15 @@
       "decode": "./dist/decode.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@bufbuild/protobuf": "^1.6.0",
     "@meshtastic/js": "2.2.18-0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.5.0",
+    "@biomejs/biome": "^1.5.1",
     "@buf/meshtastic_protobufs.bufbuild_es": "1.6.0-20240106203407-94f78518ac45.1",
     "@types/node-red": "^1.3.4",
     "node-red": "^3.1.3",

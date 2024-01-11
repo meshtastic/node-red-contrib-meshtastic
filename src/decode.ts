@@ -21,7 +21,7 @@ const decoders = {
   [Protobuf.Portnums.PortNum.STORE_FORWARD_APP]:
     new Protobuf.StoreForward.StoreAndForward(),
   [Protobuf.Portnums.PortNum.RANGE_TEST_APP]: new TextDecoder("ascii"),
-  [Protobuf.Portnums.PortNum.TELEMETRY_APP]: new Protobuf.Mesh.Telemetry(),
+  [Protobuf.Portnums.PortNum.TELEMETRY_APP]: new Protobuf.Telemetry.Telemetry(),
   [Protobuf.Portnums.PortNum.ZPS_APP]: null,
   [Protobuf.Portnums.PortNum.SIMULATOR_APP]: null,
   [Protobuf.Portnums.PortNum.TRACEROUTE_APP]: null,
