@@ -1,5 +1,4 @@
-import { Node, NodeDef, NodeInitializer } from "node-red";
-import { Message } from "@bufbuild/protobuf";
+import type { Node, NodeDef, NodeInitializer } from "node-red";
 import { Protobuf } from "@meshtastic/js";
 
 const decoders = {
@@ -39,46 +38,63 @@ const nodeInit: NodeInitializer = (red): void => {
       if (Buffer.isBuffer(msg.payload)) {
         const decoded = Protobuf.Mqtt.ServiceEnvelope.fromBinary(msg.payload);
         if (!decoded.packet) {
-          return;
+          console.debug(
+            "No packet in ServiceEnvelope. Exiting without emitting msg",
+          );
+          return null;
         }
 
         const jsonWriteOptions = {
           emitDefaultValues: true,
           enumAsInteger: true,
         };
+
+        console.debug("Serializing ServiceEnvelope to JSON for output");
         const out = decoded.toJson(jsonWriteOptions);
 
         switch (decoded.packet.payloadVariant.case) {
           case "encrypted":
+            console.debug(
+              "Payload was encrypted. Returning serialized ServiceEnvelope",
+            );
             break;
 
           case "decoded": {
             try {
               const portNum = decoded.packet.payloadVariant.value.portnum;
+
               if (decoders[portNum] === null) {
+                console.debug(`No decoder set for portnum ${portNum}`);
                 break;
               }
 
               const { payload } = decoded.packet.payloadVariant.value;
               const decoder = decoders[portNum];
 
-              if (decoder instanceof Message) {
+              if (decoder instanceof TextDecoder) {
+                console.debug("TextDecoder detected. Decoding payload");
+                out.packet.decoded.payload = decoder.decode(payload);
+              } else {
+                console.debug(
+                  "Decoder was not null and not a TextDecoder. Assuming Protobuf decoder and decoding payload",
+                );
                 out.packet.decoded.payload = decoder
                   .fromBinary(payload)
                   .toJson(jsonWriteOptions);
-              } else if (decoder instanceof TextDecoder) {
-                out.packet.decoded.payload = decoder.decode(payload);
               }
 
-              console.log(JSON.stringify(out, null, 2));
+              console.debug(
+                `Decoded payload to JSON:\n${JSON.stringify(out, null, 2)}`,
+              );
             } catch (error) {
-              console.log(`could not decode payload:${error}`);
+              console.error(`could not decode payload: ${error}`);
             }
 
             break;
           }
         }
 
+        console.debug("Outputting payload from decode node");
         send({
           payload: out,
         });
