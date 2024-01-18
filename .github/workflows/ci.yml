@@ -2,8 +2,6 @@ name: CI
 
 on: push
 
-permissions: write-all
-
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -22,6 +20,9 @@ jobs:
         run: biome ci .
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout code & submodules
         uses: actions/checkout@v4
